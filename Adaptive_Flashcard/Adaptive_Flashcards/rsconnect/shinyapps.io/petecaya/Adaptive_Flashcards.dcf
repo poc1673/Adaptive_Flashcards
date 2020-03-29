@@ -1,0 +1,12 @@
+name: Adaptive_Flashcards
+title: Adaptive_Flashcards
+username:
+account: petecaya
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1850647
+bundleId: 2937553
+url: https://petecaya.shinyapps.io/Adaptive_Flashcards/
+when: 1585435339.32785
+asMultiple: FALSE
+asStatic: FALSE
