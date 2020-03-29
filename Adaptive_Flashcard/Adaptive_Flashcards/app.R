@@ -45,10 +45,9 @@ ui <- fluidPage(
                                                         placeholder = NULL) ))),
                          
                          actionButton(inputId = "button_press", label = "Submit Answers")),
-                tabPanel("Metrics and Performance" , DT::dataTableOutput("mytable")) 
-                
-                
-                
+                tabPanel("Metrics and Performance" , 
+                         DT::dataTableOutput("mytable") ) 
+ 
                 ),
                 tabPanel("Table", tableOutput("table")) )
  
@@ -87,8 +86,10 @@ server <- function(input, output){
                 { sentence_dist <- stringdist(input$sentence_answer, sentence_vals)
                   ngram_dist <-   stringdist(input$answer, answer_vals)
                   if(answer_vals==input$answer){
-                      cur_table <<- cur_table[V1==processed_text$Translation,Percent := Percent/2]
-                      cur_table <<- recalc_probs( cur_table)}else{  }       
+                      cur_table <<- cur_table
+                      cur_table$Percent[cur_table==prev_value] <<- cur_table$Percent[cur_table==prev_value]/2
+                      cur_table <<- recalc_probs( cur_table)
+                      }else{  }
                    
                     current_value_lookup <- gen_random_word(text_data)
                     processed_text <- identify_english_translation(json_data = json_data,original_value = current_value_lookup)
@@ -100,8 +101,7 @@ server <- function(input, output){
                     output$mytable <- DT::renderDataTable({ cur_table }) 
                     prev_value <<- current_value_lookup
                     answer_vals <<- processed_text$Translation
-                    sentence_vals <<-  processed_text$Translated.Sentence  } )
-      }
+                    sentence_vals <<-  processed_text$Translated.Sentence  } ) }
 
 # Run the application 
 shinyApp(ui = ui, server = server)
