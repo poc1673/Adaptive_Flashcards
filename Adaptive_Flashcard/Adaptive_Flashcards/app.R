@@ -1,5 +1,5 @@
 rm(list = ls())
-library(pacman)
+# library(pacman)
 library(data.table)
 library(reshape2)
 library(rmarkdown)
@@ -51,7 +51,6 @@ ui <- fluidPage(
                 ),
                 tabPanel("Table", tableOutput("table")) )
  
-
 # Define server logic required to draw a histogram
 server <- function(input, output){
     output$text_output_val <- renderText({ "No input yet."  })
@@ -60,8 +59,7 @@ server <- function(input, output){
     observeEvent(input$format_text, 
                  {     output$text_output_val <- renderText({ "Input text added."  })
                      } )
-
-# Repeatedly generate the flashcards:    
+ # Repeatedly generate the flashcards:    
    text_data <- fread("Ngram Frequencies.csv")
    json_data <- RJSONIO::fromJSON("Mapping Information.json")
    text_data <- text_data[which((text_data$V1 %in% names(json_data)))]
@@ -76,8 +74,6 @@ server <- function(input, output){
    output$answer <- renderText({   processed_text$Translation })
    output$Translated_text <- renderText({   processed_text$Translated.Sentence })
    output$mytable = DT::renderDataTable({ text_data })
-
-   # Placeholders for the output from the observeEvent scope. These will be updated once the user starts clicking the buttons.
    prev_value <- current_value
    answer_vals <- processed_text$Translation
    sentence_vals <-  processed_text$Translated.Sentence
