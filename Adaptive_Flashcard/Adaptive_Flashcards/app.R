@@ -8,9 +8,10 @@ library(knitr)
 library(ggplot2)
 library(RJSONIO)
 library(stringdist)
+library(reticulate)
 # p_load(data.table,reshape2,rmarkdown,shiny,knitr,ggplot2,JSONIO)
 source("data_mgt_functions.r")
-
+source_python("text_proc_for_shiny.py")
 # Define UI for application that draws a histogram
 ui <- fluidPage(
     tabsetPanel(type = "tabs",

@@ -9,7 +9,7 @@ import ngram_functions
 import map_to_translate
 import json
 import pandas as pd
-def text_proc_function(corpus_list):
+def text_proc_function(text_data):
   ngram_data2 = map_to_translate.Tokenize_Ngram(text_data,    limit = 10000)
   
   ngram_table = ngram_data2["Ngram"] 
