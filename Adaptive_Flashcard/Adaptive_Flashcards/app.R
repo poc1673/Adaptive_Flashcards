@@ -59,6 +59,7 @@ server <- function(input, output){
 # Take the text input:
     observeEvent(input$format_text, 
                  {     output$text_output_val <- renderText({ "Input text added."  })
+                       
                      } )
  # Repeatedly generate the flashcards:    
    text_data <- fread("Ngram Frequencies.csv")
